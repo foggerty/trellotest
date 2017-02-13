@@ -3,5 +3,9 @@
 	public class TrelloCard : ITrelloItem
 	{
 		public string Id { get; set; }
+
+		public string ListId { get; set; }
+
+		public string NewComment { get; set; }
 	}
 }

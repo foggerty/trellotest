@@ -1,0 +1,7 @@
+ - use full models instead of List<>, add display name etc.
+
+ - work out what exceptions the Trello library is likey to throw, trap and handle etc.
+
+ - disconnect from net because cannot remember what the exceptions are...
+
+ - length validation etc before hitting Trello (pretty sure this can be enforced at the model?)

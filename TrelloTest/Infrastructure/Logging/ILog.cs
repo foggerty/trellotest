@@ -8,7 +8,6 @@ namespace TrelloTest.Infrastructure.Logging
 	/// </summary>
 	public interface ILog
 	{
-
 		void Info(string msg);
 
 		void Error(string msh);

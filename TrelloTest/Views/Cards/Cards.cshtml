@@ -26,9 +26,10 @@
     else
 
     {
-        using (Html.BeginForm("UpdateCard", "Cards"))
+        using (Html.BeginForm("card", "cards"))
         {
             @Html.DropDownList("cardId", items)
+            @Html.Hidden("listId", Model.Id)
 
             <input type="submit" />
         }

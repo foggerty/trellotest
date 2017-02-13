@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using TrelloTest.Infrastructure.Logging;
 using TrelloTest.Infrastructure.Trello;
 using TrelloTest.Models.Trello;
 
@@ -6,18 +8,20 @@ namespace TrelloTest.Controllers
 {
 	public class CardsController : Controller
 	{
-		private ITrelloQuery _query;
-		private ITrelloUpdate _upadate;
+		private readonly ILog _log;
+		private readonly ITrelloQuery _query;
+		private readonly ITrelloUpdate _update;
 
 		public CardsController(
+			ILog log,
 			ITrelloQuery query,
 			ITrelloUpdate update)
 		{
+			_log = log;
 			_query = query;
-			_upadate = update;
+			_update = update;
 		} 
 		
-		// GET: Cards
 		public ActionResult Boards()
 		{
 			// if user is not authenticated, redirect to main page
@@ -47,11 +51,41 @@ namespace TrelloTest.Controllers
 			return View(list);
 		}
 
-		public ActionResult UpdateCard(string cardId)
+		public ActionResult Card(string cardId, string listId)
 		{
 			// if user is not authenticated, redirect to main page
 
-			return View();
+			var card = new TrelloCard { Id = cardId, NewComment = string.Empty };
+
+			return View(card);
+		}
+
+		public ActionResult UpdateCard(string newComment, string cardId, string listId)
+		{
+			_update.AddComment(cardId, newComment);
+
+			return RedirectToAction("cards", "cards", new { listId = listId } );
+		}
+
+		/// <summary>
+		/// Utility method to trap (expected) exceptions/errors from any of the Trello
+		/// providers, meaning can all be handled in one place.
+		/// </summary>
+		/// <typeparam name="T">The return type.</typeparam>
+		/// <param name="method">Function that will be making the call to Trello.</param>
+		/// <returns></returns>
+		private T TrelloTrap<T>(Func<T> method)
+		{
+			try
+			{
+				return method();
+			}
+			catch(Exception ex)
+			{
+				_log.Error("Error when communicating with Trello.", ex);
+
+				throw;
+			}
 		}
 	}
 }

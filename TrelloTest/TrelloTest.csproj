@@ -146,13 +146,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Exceptions\TrelloComsException.cs" />
     <Compile Include="Infrastructure\Ioc\BootStrap.cs" />
     <Compile Include="Infrastructure\Logging\ILog.cs" />
     <Compile Include="Infrastructure\Logging\Log.cs" />
     <Compile Include="Infrastructure\Trello\ITrelloAuth.cs" />
     <Compile Include="Infrastructure\Trello\ITrelloQuery.cs" />
     <Compile Include="Infrastructure\Trello\ITrelloUpdate.cs" />
+    <Compile Include="Infrastructure\Trello\TrelloAuth.cs" />
+    <Compile Include="Infrastructure\Trello\TrelloQuery.cs" />
     <Compile Include="Infrastructure\Trello\TrelloStub.cs" />
+    <Compile Include="Infrastructure\Trello\TrelloUpdate.cs" />
     <Compile Include="Models\Trello\ITrelloItem.cs" />
     <Compile Include="Models\Trello\TrelloBoard.cs" />
     <Compile Include="Models\Trello\TrelloCard.cs" />
@@ -197,7 +201,7 @@
     <Content Include="Views\Cards\Boards.cshtml" />
     <Content Include="Views\Cards\Lists.cshtml" />
     <Content Include="Views\Cards\Cards.cshtml" />
-    <Content Include="Views\Cards\UpdateCard.cshtml" />
+    <Content Include="Views\Cards\Card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

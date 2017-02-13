@@ -1,0 +1,25 @@
+﻿@model TrelloTest.Models.Trello.TrelloCard
+@{
+    ViewBag.Title = "UpdateCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UpdateCard</h2>
+
+<div>
+    Add a new comment:
+</div>
+
+<div>
+    @{
+        using (Html.BeginForm("updateCard", "cards"))
+        {
+            @Html.TextBoxFor(x => x.NewComment);
+
+            @Html.Hidden("cardId", Model.Id);
+            @Html.Hidden("listId", Model.ListId);
+
+            <input type="submit" />
+        }
+    }
+</div>

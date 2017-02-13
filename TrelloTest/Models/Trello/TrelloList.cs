@@ -6,6 +6,8 @@ namespace TrelloTest.Models.Trello
 	{
 		public string Id { get; set; }
 
+		public string BoardId { get; set; }
+
 		public List<TrelloTuple> Cards { get; set; }
 	}
 }
