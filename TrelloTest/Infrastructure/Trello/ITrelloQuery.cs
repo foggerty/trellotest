@@ -1,7 +1,14 @@
-﻿namespace TrelloTest.Infrastructure.Trello
+﻿using System.Collections.Generic;
+using TrelloTest.Models.Trello;
+
+namespace TrelloTest.Infrastructure.Trello
 {
-	interface ITrelloQuery
+	public interface ITrelloQuery
 	{
-		// watch this space...
+		List<TrelloTuple> AllBoards();
+
+		List<TrelloTuple> AllLists(string boardId);
+
+		List<TrelloTuple> AllCards(string listId);
 	}
 }

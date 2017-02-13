@@ -14,9 +14,16 @@ namespace TrelloTest.Controllers
 
 		public ActionResult Index()
 		{
-			_log.Info("I hope this is all connected up....");
+			// determine if user is authenticted against Trello.  If yes, redirect to boards page.
 
 			return View();
+		}
+
+		public RedirectToRouteResult Authenticate()
+		{
+			// if user is already authenticated, redirect to boards page
+
+			return RedirectToAction("boards", "cards");
 		}
 	}
 }

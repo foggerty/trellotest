@@ -1,6 +1,6 @@
 ﻿namespace TrelloTest.Infrastructure.Trello
 {
-	interface ITrelloAuth
+	public interface ITrelloAuth
 	{
 		// watch this space...
 	}

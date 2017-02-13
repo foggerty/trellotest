@@ -1,7 +1,8 @@
 ﻿namespace TrelloTest.Infrastructure.Trello
 {
-	interface ITrelloUpdate
+	public interface ITrelloUpdate
 	{
-		// watch this space...
+		// ToDo - try bad input, see what Trello throws and put in an actual retun type
+		void AddComment(string cardId, string comment);
 	}
 }

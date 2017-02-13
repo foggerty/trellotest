@@ -1,0 +1,37 @@
+﻿@model TrelloTest.Models.Trello.TrelloBoard
+@{
+    ViewBag.Title = "Lists";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lists</h2>
+
+<div class="label-info">
+    <p>Select a list.</p>
+</div>
+
+@{
+    var items = Model?
+        .Lists?
+        .Select(x => new SelectListItem() { Text = x.Label, Value = x.Id })
+        .ToList();
+
+    if (items == null)
+    {
+        <div class="has-error">
+            <p class="alert">Something went wrong, please contact an actual web-dev to fix.</p>
+        </div>
+    }
+
+    else
+
+    {
+
+        using (Html.BeginForm("Cards", "Cards"))
+        {
+            @Html.DropDownList("listId", items)
+
+            <input type="submit" />
+        }
+    }
+}

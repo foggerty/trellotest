@@ -7,3 +7,12 @@
     <h3>(Well...   You do have to log into Trello, but that's it.  Promise.)</h3>
 </div>
 
+<div class="row">
+    @{
+        using (Html.BeginForm("authenticate", "home"))
+        {
+            <input type="submit" value="Click to authenticate against Trello"/>
+        }
+    }
+
+</div>

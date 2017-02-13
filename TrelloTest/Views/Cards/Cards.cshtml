@@ -1,0 +1,36 @@
+﻿@model TrelloTest.Models.Trello.TrelloList
+@{
+    ViewBag.Title = "Cards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cards</h2>
+
+<div class="label-info">
+    <p>Select a card.</p>
+</div>
+
+@{
+    var items = Model?
+        .Cards?
+        .Select(x => new SelectListItem() { Text = x.Label, Value = x.Id })
+        .ToList();
+
+    if (items == null)
+    {
+        <div class="has-error">
+            <p class="alert">Something went wrong, please contact an actual web-dev to fix.</p>
+        </div>
+    }
+
+    else
+
+    {
+        using (Html.BeginForm("UpdateCard", "Cards"))
+        {
+            @Html.DropDownList("cardId", items)
+
+            <input type="submit" />
+        }
+    }
+}
