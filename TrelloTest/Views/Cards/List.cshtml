@@ -30,6 +30,7 @@
         {
             @Html.DropDownList("cardId", items)
             @Html.Hidden("listId", Model.Id)
+            @Html.Hidden("token", Model.Token)
 
             <input type="submit" />
         }

@@ -1,4 +1,4 @@
-﻿@model List<TrelloTest.Models.Trello.TrelloTuple>
+﻿@model TrelloTest.Models.Trello.TrelloBoards
 @{
     ViewBag.Title = "Boards";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,6 +12,7 @@
 
 @{
     var items = Model?
+        .Boards
             .Select(x => new SelectListItem() { Text = x.Label, Value = x.Id })
             .ToList();
 
@@ -29,6 +30,7 @@
         using (Html.BeginForm("board", "cards"))
         {
             @Html.DropDownList("boardId", items)
+            @Html.Hidden("token", Model.Token)
 
             <input type="submit" />
         }

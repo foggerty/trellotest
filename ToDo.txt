@@ -11,3 +11,5 @@ and show message to user.
 - length validation etc before hitting Trello (pretty sure this can be enforced at the model?)
 
 - move Token & ID into a base class for all Trelo models.
+
+- write "installation" docs

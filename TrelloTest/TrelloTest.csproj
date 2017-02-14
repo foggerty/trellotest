@@ -164,6 +164,7 @@
     <Compile Include="Models\Home\Home.cs" />
     <Compile Include="Models\Trello\ITrelloItem.cs" />
     <Compile Include="Models\Trello\TrelloBoard.cs" />
+    <Compile Include="Models\Trello\TrelloBoards.cs" />
     <Compile Include="Models\Trello\TrelloCard.cs" />
     <Compile Include="Models\Trello\TrelloList.cs" />
     <Compile Include="Models\Trello\TrelloTuple.cs" />

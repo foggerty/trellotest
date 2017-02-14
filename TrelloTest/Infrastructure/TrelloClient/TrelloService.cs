@@ -32,7 +32,7 @@ namespace TrelloTest.Infrastructure.TrelloClient
 			_trello.Cards.AddComment(new CardId(cardId), comment);
 		}
 
-		public List<TrelloTuple> Boards(string token)
+		public TrelloBoards Boards(string token)
 		{
 			_trello.Authorize(token);
 
@@ -40,12 +40,14 @@ namespace TrelloTest.Infrastructure.TrelloClient
 
 			if (results == null)
 			{
-				return new List<TrelloTuple>();
+				return new TrelloBoards { Token = token };
 			}
 
-			return results
+			var boards =  results
 				.Select(x => new TrelloTuple { Id = x.Id, Label = x.Name } )
 				.ToList();
+
+			return new TrelloBoards { Token = token, Boards = boards };
 		}
 
 		public TrelloBoard Board(string token, string boardId)

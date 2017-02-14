@@ -10,7 +10,7 @@ namespace TrelloTest.Infrastructure.TrelloClient
 
 		TrelloBoard Board(string token, string boardId);
 
-		List<TrelloTuple> Boards(string token);
+		TrelloBoards Boards(string token);
 
 		TrelloList List(string token, string listId);
 
