@@ -36,9 +36,14 @@ namespace TrelloTest.Controllers
 		{
 			// if user is already authenticated, redirect to boards page
 
-			_trelloService.Authorise(home.AccessToken);
+			
 
-			return RedirectToAction("boards", "cards");
+			return RedirectToAction("boards", "cards", new { token = home.AccessToken });
+		}
+
+		public ActionResult TrelloError(string message)
+		{
+			return View(new { message = message });
 		}
 	}
 }

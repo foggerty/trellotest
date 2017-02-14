@@ -208,6 +208,7 @@
     <Content Include="Views\Cards\Board.cshtml" />
     <Content Include="Views\Cards\List.cshtml" />
     <Content Include="Views\Cards\Card.cshtml" />
+    <Content Include="Views\Home\TrelloError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

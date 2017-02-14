@@ -7,5 +7,7 @@
 		public string ListId { get; set; }
 
 		public string NewComment { get; set; }
+
+		public string Token { get; set; }
 	}
 }

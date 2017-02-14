@@ -8,14 +8,12 @@ namespace TrelloTest.Infrastructure.TrelloClient
 	{
 		Uri Url { get; }
 
-		void Authorise(string token);
+		TrelloBoard Board(string token, string boardId);
 
-		TrelloBoard Board(string boardId);
+		List<TrelloTuple> Boards(string token);
 
-		List<TrelloTuple> Boards();
+		TrelloList List(string token, string listId);
 
-		TrelloList List(string listId);
-
-		void AddComment(string cardId, string comment);
+		void AddComment(string token, string cardId, string comment);
 	}
 }

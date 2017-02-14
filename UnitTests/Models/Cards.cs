@@ -30,10 +30,10 @@ namespace UnitTests.Models
 		{
 			var mock = NewMock();
 
-			mock.ClassUnderTest.List("123test");
+			mock.ClassUnderTest.List("token", "123test");
 
 			mock.Get<ITrelloService>()
-				.AssertWasCalled(x => x.List("123test"));
+				.AssertWasCalled(x => x.List("token", "123test"));
 		}
 	}
 }

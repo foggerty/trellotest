@@ -4,6 +4,8 @@ namespace TrelloTest.Models.Trello
 {
 	public class TrelloBoard : ITrelloItem
 	{
+		public string Token { get; set; }
+
 		public string Id { get; set; }
 
 		public string Name { get; set; }

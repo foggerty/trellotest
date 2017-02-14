@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "TrelloError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TrelloError</h2>
+
+<div class="row">
+    <p>There was an error communicating with Trello:</p>
+    <p><em>@Model.message ?? "Unknown"</em></p>
+</div>

@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using TrelloNet;
 using TrelloTest.Infrastructure.Logging;
 using TrelloTest.Infrastructure.TrelloClient;
 using TrelloTest.Models.Trello;
@@ -18,52 +20,92 @@ namespace TrelloTest.Controllers
 			_trelloService = trelloService;
 		}
 
-		public ActionResult Boards()
+		public ActionResult Boards(string token)
 		{
-			// if user is not authenticated, redirect to main page
+			return CallTrello(token,
+				() =>
+				{
+					var boards = _trelloService.Boards(token);
 
-			var boards = _trelloService.Boards();
-
-			return View(boards);
+					return View(boards);
+				});
 		}
 
-		public ActionResult Board(string boardId)
+		public ActionResult Board(string token, string boardId)
 		{
-			// if user is not authenticated, redirect to main page
+			return CallTrello(token,
+				() =>
+				{
+					var board = _trelloService.Board(token, boardId);
 
-			var board = _trelloService.Board(boardId);
-
-			return View(board);
+					return View(board);
+				});
 		}
 
-		public ActionResult List(string listId)
+		public ActionResult List(string token, string listId)
 		{
-			// if user is not authenticated, redirect to main page
+			return CallTrello(token,
+				() =>
+				{
+					var list = _trelloService.List(token, listId);
 
-			var list = _trelloService.List(listId);
-
-			return View(list);
+					return View(list);
+				});
 		}
 
-		public ActionResult Card(string cardId, string listId)
+		public ActionResult UpdateCard(string token, string newComment, string cardId, string listId)
 		{
-			// if user is not authenticated, redirect to main page
+			return CallTrello(token,
+				() =>
+				{
+					_trelloService.AddComment(token, cardId, newComment);
+
+					return RedirectToAction("list", "cards", new { token = token, listId = listId });
+				});
+		}
+
+		public ActionResult Card(string token, string cardId, string listId)
+		{
+			if (string.IsNullOrWhiteSpace(token))
+			{
+				return RedirectToAction("index", "home");
+			}
 
 			var card = new TrelloCard
 			{
 				Id = cardId,
 				ListId = listId,
-				NewComment = string.Empty
+				NewComment = string.Empty,
+				Token = token
 			};
 
 			return View(card);
 		}
 
-		public ActionResult UpdateCard(string newComment, string cardId, string listId)
+		/// <summary>
+		/// Centralised exception handling for all calls to Trello.
+		/// Will trap and handle Trello exceptions, all others bubble up
+		/// and are handled as usual (i.e. not at all in this particular app).
+		/// Will also redirect user to 'login' page if the token is missing.
+		/// </summary>
+		/// <param name="token">Trello auth token</param>
+		/// <param name="call">Call to Trello.</param>
+		/// <returns></returns>
+		private ActionResult CallTrello(string token, Func<ActionResult> call)
 		{
-			_trelloService.AddComment(cardId, newComment);
+			if (string.IsNullOrWhiteSpace(token))
+			{
+				return RedirectToAction("index", "home");
+			}
 
-			return RedirectToAction("cards", "cards", new { listId = listId });
+			try
+			{
+				return call();
+			}
+			catch (TrelloException ex)
+			{
+				return RedirectToAction("trelloError", "home", new { message = ex.Message });
+			}
 		}
 	}
 }

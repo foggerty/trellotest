@@ -25,27 +25,33 @@ namespace TrelloTest.Infrastructure.TrelloClient
 			}
 		}
 
-		public void AddComment(string cardId, string comment)
+		public void AddComment(string token, string cardId, string comment)
 		{
+			_trello.Authorize(token);
+
 			_trello.Cards.AddComment(new CardId(cardId), comment);
 		}
 
-		public void Authorise(string token)
+		public List<TrelloTuple> Boards(string token)
 		{
 			_trello.Authorize(token);
-		}
 
-		public List<TrelloTuple> Boards()
-		{
-			var results = _trello.Boards.ForMe(BoardFilter.Public);
-			
+			var results = _trello.Boards.ForMe(BoardFilter.All);
+
+			if (results == null)
+			{
+				return new List<TrelloTuple>();
+			}
+
 			return results
 				.Select(x => new TrelloTuple { Id = x.Id, Label = x.Name } )
 				.ToList();
 		}
 
-		public TrelloBoard Board(string boardId)
+		public TrelloBoard Board(string token, string boardId)
 		{
+			_trello.Authorize(token);
+
 			var board = _trello.Boards.WithId(boardId);
 			var lists = _trello
 				.Lists
@@ -61,8 +67,10 @@ namespace TrelloTest.Infrastructure.TrelloClient
 			};	
 		}
 
-		public TrelloList List(string listId)
+		public TrelloList List(string token, string listId)
 		{
+			_trello.Authorize(token);
+
 			var list = _trello.Lists.WithId(listId);
 			var cards = _trello
 				.Cards

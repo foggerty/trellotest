@@ -27,9 +27,10 @@
 
     {
 
-        using (Html.BeginForm("Cards", "Cards"))
+        using (Html.BeginForm("list", "cards"))
         {
             @Html.DropDownList("listId", items)
+            @Html.Hidden("token", Model.Token);
 
             <input type="submit" />
         }
