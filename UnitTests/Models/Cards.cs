@@ -6,15 +6,11 @@ using TrelloTest.Controllers;
 using TrelloTest.Infrastructure.Trello;
 using TrelloTest.Models.Trello;
 
-namespace UnitTests
+namespace UnitTests.Models
 {
 	[TestFixture]
 	public class Cards
 	{
-		// There's so little worth testing in this project!
-		// This is more about demonstrating that I'm famaliar with the standard
-		// practices/tooling.
-
 		private RhinoAutoMocker<CardsController> NewMock()
 		{
 			return new RhinoAutoMocker<CardsController>();

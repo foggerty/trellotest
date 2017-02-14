@@ -8,5 +8,7 @@ namespace TrelloTest.Infrastructure.Exceptions
 	/// </summary>
 	public class TrelloComsException : Exception
 	{
+		public TrelloComsException(string msg) : base(msg)
+		{ }
 	}
 }
