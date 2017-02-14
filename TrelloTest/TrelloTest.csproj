@@ -162,6 +162,7 @@
     <Compile Include="Infrastructure\Logging\Log.cs" />
     <Compile Include="Infrastructure\TrelloClient\ITrelloService.cs" />
     <Compile Include="Infrastructure\TrelloClient\TrelloService.cs" />
+    <Compile Include="Models\Home\Home.cs" />
     <Compile Include="Models\Trello\ITrelloItem.cs" />
     <Compile Include="Models\Trello\TrelloBoard.cs" />
     <Compile Include="Models\Trello\TrelloCard.cs" />

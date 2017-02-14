@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TrelloTest.Models.Home.Home
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,11 +9,22 @@
 </div>
 
 <div class="row">
-    @{
-        using (Html.BeginForm("authenticate", "home"))
-        {
-            <input type="submit" value="Click to authenticate against Trello"/>
-        }
-    }
 
+    <p>Click the link below and a new window will open where you can give Trello permission to open this app.</p>
+    <p>Once done, you will be given a token.  Copy and paste it into the box below to get started.</p>
+
+</div>
+
+<div class="row">
+    <a href="@Model.TrelloUrl" target="_bank">Click here!</a>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("authenticate", "home"))
+    {
+        @Html.TextBoxFor(x => x.AccessToken);
+
+        <input type="submit" />
+    }
 </div>
