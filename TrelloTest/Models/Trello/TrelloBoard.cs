@@ -6,6 +6,7 @@ namespace TrelloTest.Models.Trello
 	{
 		public string Id { get; set; }
 
+		public string Name { get; set; }
 		public List<TrelloTuple> Lists { get; set; }
 	}
 }

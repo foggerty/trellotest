@@ -8,6 +8,8 @@ namespace TrelloTest.Models.Trello
 
 		public string BoardId { get; set; }
 
+		public string Name { get; set; }
+
 		public List<TrelloTuple> Cards { get; set; }
 	}
 }

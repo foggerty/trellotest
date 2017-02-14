@@ -3,7 +3,7 @@ using AutoMock;
 using NUnit.Framework;
 using Rhino.Mocks;
 using TrelloTest.Controllers;
-using TrelloTest.Infrastructure.Trello;
+using TrelloTest.Infrastructure.TrelloClient;
 using TrelloTest.Models.Trello;
 
 namespace UnitTests.Models
@@ -30,10 +30,10 @@ namespace UnitTests.Models
 		{
 			var mock = NewMock();
 
-			mock.ClassUnderTest.Cards("123test");
+			mock.ClassUnderTest.List("123test");
 
-			mock.Get<ITrelloQuery>()
-				.AssertWasCalled(x => x.AllCards("123test"));
+			mock.Get<ITrelloService>()
+				.AssertWasCalled(x => x.List("123test"));
 		}
 	}
 }

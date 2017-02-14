@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TrelloTest.Infrastructure.Config;
 using TrelloTest.Infrastructure.Exceptions;
 
@@ -15,19 +10,19 @@ namespace UnitTests.Infrastructure
 		[Test]
 		public void Throws_exception_when_no_string_key()
 		{
-			Assert.Throws<ConfigException>(() => Config.GetString("Nothing here."));
+			Assert.Throws<ConfigException>(() => AppConfig.GetString("Nothing here."));
 		}
 
 		[Test]
 		public void Throws_exception_when_no_int_key()
 		{
-			Assert.Throws<ConfigException>(() => Config.GetInt("Nothing here."));
+			Assert.Throws<ConfigException>(() => AppConfig.GetInt("Nothing here."));
 		}
 
 		[Test]
 		public void Happy_string_path_is_happy()
 		{
-			var test = Config.GetString("GoodString");
+			var test = AppConfig.GetString("GoodString");
 
 			Assert.AreEqual("Moose", test);
 		}
@@ -35,20 +30,20 @@ namespace UnitTests.Infrastructure
 		[Test]
 		public void Happy_int_path_is_happy()
 		{
-			var test = Config.GetInt("GoodInt");
+			var test = AppConfig.GetInt("GoodInt");
 
 			Assert.AreEqual(123, test);
 		}
 
 		public void Bad_string_throws_exception()
 		{
-			Assert.Throws<ConfigException>(() => Config.GetString("BadString"));
+			Assert.Throws<ConfigException>(() => AppConfig.GetString("BadString"));
 		}
 
 		[Test]
 		public void Bad_int_throws_exception()
 		{
-			Assert.Throws<ConfigException>(() => Config.GetInt("BadInt"));
+			Assert.Throws<ConfigException>(() => AppConfig.GetInt("BadInt"));
 		}
 	}
 }

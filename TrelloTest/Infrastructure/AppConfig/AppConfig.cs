@@ -17,7 +17,7 @@ namespace TrelloTest.Infrastructure.Config
 	///      of code that "worked" with nulls, despite the assumption that the
 	///      key/value would always be set.
 	///   b) All magic config strings are in one place.
-	///   c) Easy to test/mock.  Just replace the pubilc functions with something
+	///   c) Easy to test/mock.  Just replace the public functions with something
 	///      that returns a known value.
 	///      
 	/// There's slight problem in that the GetXyz() methods need to be public
@@ -25,11 +25,10 @@ namespace TrelloTest.Infrastructure.Config
 	/// like adding their keys to here, and then a new access method - code
 	/// reviews FTW.
 	/// </summary>
-	public static class Config
+	public static class AppConfig
 	{
-		private const string TrelloKey = "TrelloApiKey";
-
-		public static Func<string> TrelloApiKey = () => GetString(TrelloKey);
+		public static Func<string> TrelloApiKey = () => GetString("TrelloApiKey");
+		public static Func<string> AppName = () => GetString("AppName");
 
 		public static string GetString(string key)
 		{

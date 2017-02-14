@@ -1,7 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TrelloTest.Infrastructure.Logging;
-using TrelloTest.Infrastructure.Trello;
+using TrelloTest.Infrastructure.TrelloClient;
 using TrelloTest.Models.Trello;
 
 namespace TrelloTest.Controllers
@@ -9,44 +8,39 @@ namespace TrelloTest.Controllers
 	public class CardsController : Controller
 	{
 		private readonly ILog _log;
-		private readonly ITrelloQuery _query;
-		private readonly ITrelloUpdate _update;
+		private readonly ITrelloService _trelloService;
 
 		public CardsController(
 			ILog log,
-			ITrelloQuery query,
-			ITrelloUpdate update)
+			ITrelloService trelloService)
 		{
 			_log = log;
-			_query = query;
-			_update = update;
-		} 
-		
+			_trelloService = trelloService;
+		}
+
 		public ActionResult Boards()
 		{
 			// if user is not authenticated, redirect to main page
 
-			var boards = _query.AllBoards();
+			var boards = _trelloService.Boards();
 
 			return View(boards);
 		}
 
-		public ActionResult Lists(string boardId)
+		public ActionResult Board(string boardId)
 		{
 			// if user is not authenticated, redirect to main page
 
-			var lists = _query.AllLists(boardId);
-			var board = new TrelloBoard { Id = boardId, Lists = lists };
+			var board = _trelloService.Board(boardId);
 
 			return View(board);
 		}
 
-		public ActionResult Cards(string listId)
+		public ActionResult List(string listId)
 		{
 			// if user is not authenticated, redirect to main page
 
-			var cards = _query.AllCards(listId);
-			var list = new TrelloList { Id = listId, Cards = cards };
+			var list = _trelloService.List(listId);
 
 			return View(list);
 		}
@@ -55,37 +49,21 @@ namespace TrelloTest.Controllers
 		{
 			// if user is not authenticated, redirect to main page
 
-			var card = new TrelloCard { Id = cardId, NewComment = string.Empty };
+			var card = new TrelloCard
+			{
+				Id = cardId,
+				ListId = listId,
+				NewComment = string.Empty
+			};
 
 			return View(card);
 		}
 
 		public ActionResult UpdateCard(string newComment, string cardId, string listId)
 		{
-			_update.AddComment(cardId, newComment);
+			_trelloService.AddComment(cardId, newComment);
 
-			return RedirectToAction("cards", "cards", new { listId = listId } );
-		}
-
-		/// <summary>
-		/// Utility method to trap (expected) exceptions/errors from any of the Trello
-		/// providers, meaning can all be handled in one place.
-		/// </summary>
-		/// <typeparam name="T">The return type.</typeparam>
-		/// <param name="method">Function that will be making the call to Trello.</param>
-		/// <returns></returns>
-		private T TrelloTrap<T>(Func<T> method)
-		{
-			try
-			{
-				return method();
-			}
-			catch(Exception ex)
-			{
-				_log.Error("Error when communicating with Trello.", ex);
-
-				throw;
-			}
+			return RedirectToAction("cards", "cards", new { listId = listId });
 		}
 	}
 }
