@@ -1,11 +1,3 @@
-Work out what exceptions the Trello library is likey to throw, trap 
-and handle etc. and disconnect from net because cannot remember what 
-the exceptions are, then centralise exception handling in the Trello client.
-Just have it throw a custom exception that the top-level filters can catch
-and show message to user.
-
-- add board/list/card name to views
-
 - how to handle when Trello logon expires?
 
 - length validation etc before hitting Trello (pretty sure this can be enforced at the model?)
@@ -13,3 +5,5 @@ and show message to user.
 - move Token & ID into a base class for all Trelo models.
 
 - write "installation" docs
+
+- logging!
