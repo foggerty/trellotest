@@ -24,17 +24,18 @@ namespace TrelloTest.Infrastructure.TrelloClient
 			}
 		}
 
-		public void AddComment(string token, string cardId, string comment)
+		public void Authorise(string token)
 		{
 			_trello.Authorize(token);
+		}
 
+		public void AddComment(string token, string cardId, string comment)
+		{
 			_trello.Cards.AddComment(new CardId(cardId), comment);
 		}
 
 		public TrelloBoards Boards(string token)
 		{
-			_trello.Authorize(token);
-
 			var results = _trello.Boards.ForMe(BoardFilter.All);
 
 			if (results == null)
@@ -51,8 +52,6 @@ namespace TrelloTest.Infrastructure.TrelloClient
 
 		public TrelloBoard Board(string token, string boardId)
 		{
-			_trello.Authorize(token);
-
 			var board = _trello.Boards.WithId(boardId);
 			var lists = _trello
 				.Lists
@@ -70,8 +69,6 @@ namespace TrelloTest.Infrastructure.TrelloClient
 
 		public TrelloList List(string token, string listId)
 		{
-			_trello.Authorize(token);
-
 			var list = _trello.Lists.WithId(listId);
 			var cards = _trello
 				.Cards

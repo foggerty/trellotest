@@ -1,5 +1,3 @@
-- move Token & ID into a base class for all Trelo models.
-
 - write "installation" docs
 
 - logging!

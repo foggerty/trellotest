@@ -20,8 +20,6 @@ namespace TrelloTest.Controllers
 
 		public ActionResult Index()
 		{
-			// determine if user is authenticted against Trello.  If yes, redirect to boards page.
-
 			var url = _trelloService.Url;
 			var home = new Home
 			{
@@ -34,10 +32,6 @@ namespace TrelloTest.Controllers
 
 		public RedirectToRouteResult Authenticate(Home home)
 		{
-			// if user is already authenticated, redirect to boards page
-
-			
-
 			return RedirectToAction("boards", "cards", new { token = home.AccessToken });
 		}
 

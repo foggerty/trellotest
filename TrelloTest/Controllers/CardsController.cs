@@ -95,8 +95,11 @@ namespace TrelloTest.Controllers
 		{
 			if (string.IsNullOrWhiteSpace(token))
 			{
+				_log.Info("No token for session xyz, redirecting to home page.");
 				return RedirectToAction("index", "home");
 			}
+
+			_trelloService.Authorise(token);
 
 			try
 			{
@@ -104,6 +107,7 @@ namespace TrelloTest.Controllers
 			}
 			catch (TrelloException ex)
 			{
+				_log.Error("Error when calling Trello", ex);
 				return RedirectToAction("trelloError", "home", new { message = ex.Message });
 			}
 		}

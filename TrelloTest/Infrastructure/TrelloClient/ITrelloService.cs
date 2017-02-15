@@ -7,6 +7,8 @@ namespace TrelloTest.Infrastructure.TrelloClient
 	{
 		Uri Url { get; }
 
+		void Authorise(string token);
+
 		TrelloBoard Board(string token, string boardId);
 
 		TrelloBoards Boards(string token);
