@@ -2,15 +2,9 @@
 
 namespace TrelloTest.Models.Trello
 {
-	public class TrelloList : ITrelloItem
-	{
-		public string Id { get; set; }
-
-		public string Token { get; set; }
-
+	public class TrelloList : TrelloItem
+	{ 
 		public string BoardId { get; set; }
-
-		public string Name { get; set; }
 
 		public List<TrelloTuple> Cards { get; set; }
 	}

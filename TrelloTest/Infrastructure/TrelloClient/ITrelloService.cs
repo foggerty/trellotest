@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using TrelloTest.Models.Trello;
 
 namespace TrelloTest.Infrastructure.TrelloClient
